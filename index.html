@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NutriPlan | Meals & Recipes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 4c-8.5.4-14 2.8-14 9.1 0 2.5 1.8 4.4 4.3 4.4 5.7 0 8.1-5 9.7-13.5Z" fill="currentColor"/><path d="M4 20c3.4-5 6.9-7.4 12.3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><strong>NutriPlan</strong><small>Your Wellness Journey</small></div></div>
+      <nav class="side-nav">
+        <p class="nav-heading">MAIN MENU</p>
+        <button class="nav-link active" data-view="recipes" type="button" aria-current="page"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 3v7m3-7v7m3-7v7M4 10h6M7 10v11M18 21V3c-3 2-4 5-4 9h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Meals &amp; Recipes</button>
+        <button class="nav-link" data-view="products" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 4v16M6 4v16M10 4v16M13 4v16M17 4v16M20 4v16" stroke="currentColor" stroke-width="1.7"/></svg> Product Scanner</button>
+        <button class="nav-link" data-view="log" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="2"/><path d="M9 4.5V3h6v1.5M9 10h6m-6 4h6m-6 4h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Food Log</button>
+      </nav>
+      <div class="sidebar-foot"><img src="assets/youssef-avatar.jpg" alt="" width="42" height="42"><div><strong>Youssef Amir</strong><span>Premium Member</span></div><span class="profile-chevron" aria-hidden="true">⌄</span></div>
+    </aside>
+
+    <main class="main" id="recipes">
+      <header class="page-header"><h1 id="page-title">Meals &amp; Recipes</h1><p id="page-subtitle">Discover delicious recipes for your next meal</p></header>
+      <div id="list-view" class="page-view">
+        <section class="controls" aria-label="Recipe search and filters">
+          <label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">Search recipes</span><input id="search" type="search" placeholder="Search recipes by name..." autocomplete="off"></label>
+          <div class="cuisine-bar"><div id="area-chips" class="cuisine-chips" aria-label="Filter by cuisine"></div><button id="clear-filters" class="text-button" type="button" hidden>Clear filters</button></div>
+          <select id="area" hidden aria-label="Selected cuisine"><option value="">All cuisines</option></select>
+          <select id="category" hidden aria-label="Selected meal type"><option value="">All meal types</option></select>
+        </section>
+        <section class="meal-types" aria-labelledby="meal-types-title"><div class="section-heading"><div><h2 id="meal-types-title">Browse by Meal Type</h2><p>Find the perfect recipe for any time of day</p></div><button id="view-all" class="text-button" type="button">View All <span aria-hidden="true">›</span></button></div><div id="category-chips" class="category-chips" aria-label="Meal types"></div><button id="more-categories" class="text-button more-categories" type="button" hidden>More meal types</button></section>
+        <section class="recipes-section" aria-labelledby="recipes-title"><div class="section-heading"><div><h2 id="recipes-title">All Recipes</h2><p id="recipe-count" aria-live="polite">Loading recipes...</p></div><div class="view-switch" aria-label="Recipe display"><button id="grid-button" type="button" aria-label="Grid view" aria-pressed="true">▦</button><button id="list-button" type="button" aria-label="List view" aria-pressed="false">☷</button></div></div><div id="status" class="status" role="status">Loading recipes...</div><div id="recipe-grid" class="recipe-grid" hidden></div></section>
+      </div>
+      <section id="detail-view" class="detail-view page-view" hidden aria-label="Recipe details"></section>
+
+      <section id="products-view" class="page-view inner-page" hidden aria-label="Product Scanner">
+        <div class="panel">
+          <h2>Find a product</h2>
+          <p class="muted">Search packaged foods by name or enter the barcode printed on the package.</p>
+          <div class="product-forms">
+            <form id="product-search-form" class="inline-form">
+              <label for="product-search">Product name</label>
+              <div><input id="product-search" type="search" placeholder="e.g. milk" required><button class="primary-button" type="submit">Search</button></div>
+            </form>
+            <form id="barcode-form" class="inline-form">
+              <label for="barcode">Barcode</label>
+              <div><input id="barcode" inputmode="numeric" pattern="[0-9]+" placeholder="e.g. 3017620422003" required><button class="primary-button" type="submit">Look up</button></div>
+            </form>
+          </div>
+        </div>
+        <div id="product-status" class="status" role="status">Search for a product to see its nutrition.</div>
+        <div id="product-results" class="product-grid" hidden></div>
+      </section>
+
+      <section id="log-view" class="page-view inner-page" hidden aria-label="Food Log">
+        <div class="panel log-toolbar"><div><h2>Daily Food Log</h2><p class="muted">Meals and products saved in this browser.</p></div><label for="log-date">Day <input id="log-date" type="date"></label></div>
+        <div class="panel">
+          <div class="section-heading"><div><h2>Daily nutrition</h2><p>Values with unavailable nutrition are excluded from totals.</p></div></div>
+          <div id="nutrition-progress" class="progress-grid"></div>
+        </div>
+        <div class="panel"><h2>Daily goals</h2><p class="muted">Choose goals for the progress bars. These are saved in this browser.</p><form id="goal-form" class="goals-form"><label>Calories <input name="calories" type="number" min="1" step="1" required></label><label>Protein (g) <input name="protein" type="number" min="1" step="1" required></label><label>Carbs (g) <input name="carbs" type="number" min="1" step="1" required></label><label>Fat (g) <input name="fat" type="number" min="1" step="1" required></label><button class="primary-button" type="submit">Save goals</button></form><p id="goal-message" class="feedback" role="status"></p></div>
+        <div class="panel"><div class="section-heading"><h2>Logged items</h2><span id="log-count" class="muted"></span></div><div id="log-items"></div></div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
